@@ -16,6 +16,11 @@
       "object-destructuring",
       "array-destructuring"
     ],
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
     "object-literal-shorthand": true,
     "interface-over-type-literal": false,
     "no-unused-expression": false,
