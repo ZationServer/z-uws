@@ -1,6 +1,7 @@
 import { eventEmitter } from '../emitter';
 import { SendOptions, Listener, SocketAddress } from '../types';
 import { native, noop, DEFAULT_PAYLOAD_LIMIT, OPCODE_PING, OPCODE_BINARY, OPCODE_TEXT } from './shared';
+import * as HTTP from 'http';
 
 native.setNoop(noop);
 
@@ -55,22 +56,33 @@ native.client.group.onDisconnection(clientGroup, (newExternal: any, code: number
 // get event emitter instance
 export const EventEmitterClient: any = eventEmitter();
 
+type NewUpgradeReq = HTTP.IncomingMessage & SocketAddress;
+
 export class WebSocket extends EventEmitterClient {
   public OPEN: number = 1;
   public CLOSED: number = 0;
 
   public external: any = noop;
   public executeOn: string;
+  private _upgradeReq: HTTP.IncomingMessage & SocketAddress;
 
-  constructor(url: string, external?: any, isServer?: boolean) {
+  constructor(url: string, upgradeReq: HTTP.IncomingMessage, external?: any, isServer?: boolean) {
     super();
-
     this.external = external;
+    const address: SocketAddress = this._socket;
+    (upgradeReq as NewUpgradeReq).remoteAddress = address.remoteAddress;
+    (upgradeReq as NewUpgradeReq).remoteFamily = address.remoteFamily;
+    (upgradeReq as NewUpgradeReq).remotePort = address.remotePort;
+    this._upgradeReq = (upgradeReq as NewUpgradeReq);
     this.executeOn = isServer ? 'server' : 'client';
 
     if (!isServer) {
       native.connect(clientGroup, url, this);
     }
+  }
+
+  get upgradeReq(): HTTP.IncomingMessage {
+    return this._upgradeReq;
   }
 
   public get _socket(): SocketAddress {

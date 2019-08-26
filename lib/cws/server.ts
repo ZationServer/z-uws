@@ -99,7 +99,7 @@ export class WebSocketServer extends EventEmitterServer {
         };
 
         return configs.verifyClient(info, (result: any, code: number, name: string) =>
-          result ? this.handleUpgrade(req, socket) : this.dropConnection(socket, code, name));
+            result ? this.handleUpgrade(req, socket) : this.dropConnection(socket, code, name));
       }
 
       return this.handleUpgrade(req, socket);
@@ -120,7 +120,7 @@ export class WebSocketServer extends EventEmitterServer {
     this.serverGroup = native.server.group.create(nativeOptions, configs.maxPayload || DEFAULT_PAYLOAD_LIMIT);
 
     native.server.group.onConnection(this.serverGroup, (external: any) => {
-      const webSocket: WebSocket = new WebSocket(null, external, true);
+      const webSocket: WebSocket = new WebSocket(null, this.upgradeReq, external, true);
       native.setUserData(external, webSocket);
       this.emit('connection', webSocket, this.upgradeReq);
       this.upgradeReq = null;
@@ -149,13 +149,13 @@ export class WebSocketServer extends EventEmitterServer {
     });
 
     native.server.group.onPing(
-      this.serverGroup,
-      (message: any, webSocket: WebSocket): void => webSocket.emit('ping', message)
+        this.serverGroup,
+        (message: any, webSocket: WebSocket): void => webSocket.emit('ping', message)
     );
 
     native.server.group.onPong(
-      this.serverGroup,
-      (message: any, webSocket: WebSocket): void => webSocket.emit('pong', message)
+        this.serverGroup,
+        (message: any, webSocket: WebSocket): void => webSocket.emit('pong', message)
     );
   }
 
@@ -179,11 +179,11 @@ export class WebSocketServer extends EventEmitterServer {
         this.upgradeReq = req;
 
         native.upgrade(
-          this.serverGroup,
-          ticket,
-          secKey,
-          req.headers['sec-websocket-extensions'],
-          req.headers['sec-websocket-protocol']
+            this.serverGroup,
+            ticket,
+            secKey,
+            req.headers['sec-websocket-extensions'],
+            req.headers['sec-websocket-protocol']
         );
       });
     }
