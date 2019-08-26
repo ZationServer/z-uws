@@ -1,6 +1,6 @@
 # z-uws 
 
-*Highly scalable, structured, secure, real-time application server framework 🚀.*
+*Z-uws is a fork of cWS which is a modified version of the uWebsockets v0.14 with some minor tweaks in C++ code and a complete rewrite of JS code. Z-uws changes some code to work with socketcluster.*
 
 <h1 align="center">
   <!-- Logo -->
