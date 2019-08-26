@@ -1,0 +1,15 @@
+.vscode/
+
+lib/
+test/
+build/
+targets/
+node_modules/
+
+make.bat
+Makefile
+.gitignore
+build_log.txt
+package-lock.json
+tsbuild.json
+tslint.json
