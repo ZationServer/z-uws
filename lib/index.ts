@@ -1,2 +1,7 @@
-export { WebSocket } from './cws/client';
-export { WebSocketServer } from './cws/server';
+import { WebSocket as Client}       from './cws/client';
+import { WebSocketServer as Server} from './cws/server';
+
+export {
+    Server,
+    Client
+};
