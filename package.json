@@ -1,6 +1,6 @@
 {
-  "name": "z-ws",
-  "version": "0.15.0",
+  "name": "z-uws",
+  "version": "0.15.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "description": "ClusterWS cWS custom fork of uWebSockets 0.14",
