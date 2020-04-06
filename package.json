@@ -1,6 +1,6 @@
 {
   "name": "z-uws",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "description": "Z-uws - fast C++ WebSocket implementation for Node.js",
@@ -27,6 +27,9 @@
     "type": "git",
     "url": "https://github.com/ZationServer/z-uws.git"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "devDependencies": {
     "@types/chai": "^4.2.9",
     "@types/mocha": "^7.0.1",
