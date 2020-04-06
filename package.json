@@ -1,29 +1,61 @@
 {
   "name": "z-uws",
-  "version": "0.15.2",
+  "version": "1.5.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "description": "ClusterWS cWS custom fork of uWebSockets 0.14",
+  "description": "Z-uws - fast C++ WebSocket implementation for Node.js",
   "scripts": {
+    "lint": "tslint -c tslint.json 'lib/**/*.ts'",
+    "test": "nyc mocha './tests/**/*.test.ts' --exit",
+    "clean": "rimraf dist/bindings/*",
     "install": "node-gyp rebuild > build_log.txt 2>&1 || exit 0",
-    "build": "ts-builder -c ./tsbuild.json"
+    "build-ts": "rimraf dist/*.js && rimraf dist/*.ts && npm run lint && tsc",
+    "build-cpp": "node-gyp rebuild > build_log.txt 2>&1 || exit 0"
   },
   "engines": {
     "node": ">=8.12.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ZationServer/z-uws.git"
   },
   "keywords": [
     "tiny",
     "websocket",
     "clusterws",
+    "socket",
     "cws"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZationServer/z-uws.git"
+  },
   "devDependencies": {
-    "@types/node": "^10.7.0",
-    "ts-builder": "0.9.0"
+    "@types/chai": "^4.2.9",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.4",
+    "chai": "^4.2.0",
+    "mocha": "^7.0.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.6.2",
+    "nyc": "^15.0.0",
+    "tslint": "^6.0.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.8.2"
+  },
+  "nyc": {
+    "all": true,
+    "temp-directory": "./node_modules/.cache/nyc_output",
+    "include": [
+      "lib/**/*.ts",
+      "tests/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
   }
 }

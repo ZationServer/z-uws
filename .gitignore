@@ -2,9 +2,11 @@
 
 build/
 targets/
+coverage/
+excludes/
 node_modules/
-dist/
 .idea/
+.DS_Store
 
 build_log.txt
 package-lock.json
