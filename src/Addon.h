@@ -12,16 +12,19 @@
   #include "headers/10/tls_wrap.h"
 #endif
 
-#if NODE_MAJOR_VERSION==11
-  #include "headers/11/tls_wrap.h"
-#endif
-
 #if NODE_MAJOR_VERSION==12
   #include "headers/12/tls_wrap.h"
+  #include "headers/12/base_object-inl.h"
 #endif
 
 #if NODE_MAJOR_VERSION==13
   #include "headers/13/tls_wrap.h"
+  #include "headers/13/base_object-inl.h"
+#endif
+
+#if NODE_MAJOR_VERSION==14
+  #include "headers/14/tls_wrap.h"
+  #include "headers/14/base_object-inl.h"
 #endif
 
 using BaseObject = node::BaseObject;

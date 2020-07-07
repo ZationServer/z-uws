@@ -1,12 +1,12 @@
 .vscode/
 
-.idea/
 lib/
 tests/
 build/
 targets/
 excludes/
 node_modules/
+examples/
 
 .travis.yml
 .gitignore

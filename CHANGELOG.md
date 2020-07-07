@@ -1,3 +1,25 @@
+## Released 3.0.0
+
+**Changes**
+* Add support for Node 14 [#42](https://github.com/ClusterWS/cWS/pull/42) 
+* Rebuild Node 12 bindings from 12.8.2
+* Clarify `Supported Node Versions` in README
+
+## Released 2.0.0
+
+**Changes**
+* Drop support for Node 8,9,11
+* Fix issues with latest Node 12
+* Add "Supported Node Versions" section in README
+
+## Released 1.6.0
+
+**Changes**
+* If no close code provided from client return `1005` (similar to ws.js module)
+
+**Bugs**
+* Fix [invalid UTF-8 sequence bug](https://github.com/ClusterWS/cWS/issues/39)
+
 ## Released 1.5.0
 
 **Changes**

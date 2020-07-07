@@ -9,4 +9,3 @@ node_modules/
 .DS_Store
 
 build_log.txt
-package-lock.json

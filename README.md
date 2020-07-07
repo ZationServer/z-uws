@@ -1,6 +1,7 @@
 # z-uws 
 
-*Z-uws is a clone of cWS which is a modified version of the uWebsockets v0.14 with some minor tweaks in C++ code and a complete rewrite of JS code.*
+*This repository is a fork of [cWS](https://github.com/ClusterWS/cWS/tree/V3.0.0) which is a fork of [uWebSockets v0.14](https://github.com/uNetworking/uWebSockets/tree/v0.14).
+ It contains minor optimizations for Zation.*
 
 <h1 align="center">
   <!-- Logo -->
