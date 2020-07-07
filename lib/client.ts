@@ -90,8 +90,8 @@ export class WebSocket {
       native[this.socketType].send(this.external, message,
           typeof message === 'string' ? OPCODE_TEXT : OPCODE_BINARY, null, !!compress);
     } else {
-      const err = new Error('Socket not connected');
-      (err as any).code = 'SocketNotConnected';
+      const err = new Error('Socket not connected') as Error & {code?: string};
+      err.code = 'SocketNotConnected';
       throw err;
     }
   }
