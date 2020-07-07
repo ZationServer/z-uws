@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.WebSocket = void 0;
 const server_1 = require("./server");
 const shared_1 = require("./shared");
 const clientGroup = shared_1.native.client.group.create(0, shared_1.DEFAULT_PAYLOAD_LIMIT);
@@ -63,19 +64,14 @@ class WebSocket {
         }
         this.registeredEvents[event] = listener;
     }
-    send(message, options, cb) {
+    send(message, compress) {
         if (this.external) {
-            let opCode = typeof message === 'string' ? shared_1.OPCODE_TEXT : shared_1.OPCODE_BINARY;
-            if (options && options.binary === false) {
-                opCode = shared_1.OPCODE_TEXT;
-            }
-            if (options && options.binary === true) {
-                opCode = shared_1.OPCODE_BINARY;
-            }
-            shared_1.native[this.socketType].send(this.external, message, opCode, cb ? () => process.nextTick(cb) : null, options && options.compress);
+            shared_1.native[this.socketType].send(this.external, message, typeof message === 'string' ? shared_1.OPCODE_TEXT : shared_1.OPCODE_BINARY, null, !!compress);
         }
-        else if (cb) {
-            cb(new Error('Socket not connected'));
+        else {
+            const err = new Error('Socket not connected');
+            err.code = 'SocketNotConnected';
+            throw err;
         }
     }
     ping(message) {

@@ -1,6 +1,6 @@
 {
   "name": "z-uws",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "description": "Z-uws - fast C++ WebSocket implementation for Node.js",
