@@ -91,7 +91,7 @@ export class WebSocket {
           typeof message === 'string' ? OPCODE_TEXT : OPCODE_BINARY, null, !!compress);
     } else {
       const err = new Error('Socket not connected');
-      err.name = 'SocketNotConnected';
+      (err as any).code = 'SocketNotConnected';
       throw err;
     }
   }
