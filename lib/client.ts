@@ -85,22 +85,14 @@ export class WebSocket {
     this.registeredEvents[event] = listener;
   }
 
-  public send(message: string | Buffer, options?: { binary?: boolean, compress?: boolean }, cb?: (err?: Error) => void): void {
+  public send(message: string | Buffer, compress?: boolean): void {
     if (this.external) {
-      let opCode: number = typeof message === 'string' ? OPCODE_TEXT : OPCODE_BINARY;
-
-      // provided options should always overwrite default
-      if (options && options.binary === false) {
-        opCode = OPCODE_TEXT;
-      }
-
-      if (options && options.binary === true) {
-        opCode = OPCODE_BINARY;
-      }
-
-      native[this.socketType].send(this.external, message, opCode, cb ? (): void => process.nextTick(cb) : null, options && options.compress);
-    } else if (cb) {
-      cb(new Error('Socket not connected'));
+      native[this.socketType].send(this.external, message,
+          typeof message === 'string' ? OPCODE_TEXT : OPCODE_BINARY, null, !!compress);
+    } else {
+      const err = new Error('Socket not connected');
+      err.name = 'SocketNotConnected';
+      throw err;
     }
   }
 
