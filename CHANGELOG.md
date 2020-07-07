@@ -1,3 +1,8 @@
+## Released 3.0.1
+
+**Changes**
+* Simplify the send method of the WebSocket class
+
 ## Released 3.0.0
 
 **Changes**
