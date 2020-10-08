@@ -1,3 +1,8 @@
+## Released 3.0.2
+
+**Changes**
+* Add ArrayBuffer as types to send messages.
+
 ## Released 3.0.1
 
 **Changes**
