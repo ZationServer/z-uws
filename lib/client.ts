@@ -85,7 +85,7 @@ export class WebSocket {
     this.registeredEvents[event] = listener;
   }
 
-  public send(message: string | Buffer, compress?: boolean): void {
+  public send(message: string | Buffer | ArrayBuffer, compress?: boolean): void {
     if (this.external) {
       native[this.socketType].send(this.external, message,
           typeof message === 'string' ? OPCODE_TEXT : OPCODE_BINARY, null, !!compress);
@@ -96,7 +96,7 @@ export class WebSocket {
     }
   }
 
-  public ping(message?: string | Buffer): void {
+  public ping(message?: string | Buffer | ArrayBuffer): void {
     if (this.external) {
       native[this.socketType].send(this.external, message, OPCODE_PING);
     }

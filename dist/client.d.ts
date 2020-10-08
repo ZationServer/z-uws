@@ -25,8 +25,8 @@ export declare class WebSocket {
     on(event: 'error', listener: (err: Error) => void): void;
     on(event: 'message', listener: (message: string | any) => void): void;
     on(event: 'close', listener: (code?: number, reason?: string) => void): void;
-    send(message: string | Buffer, compress?: boolean): void;
-    ping(message?: string | Buffer): void;
+    send(message: string | Buffer | ArrayBuffer, compress?: boolean): void;
+    ping(message?: string | Buffer | ArrayBuffer): void;
     close(code?: number, reason?: string): void;
     terminate(): void;
 }
